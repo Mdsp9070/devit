@@ -10,7 +10,7 @@ defmodule Devit.CLI do
     |> parse_args()
     |> case do
       path when is_binary(path) ->
-        nil
+        {:ok, path}
 
       err when is_tuple(err) ->
         err
@@ -21,8 +21,6 @@ defmodule Devit.CLI do
   end
 
   defp parse_args(args) do
-    if Enum.empty?(args), do: default_error()
-
     opts = [strict: [article_path: :string], aliases: [a: :article_path]]
 
     case OptionParser.parse(args, opts) do
@@ -36,7 +34,7 @@ defmodule Devit.CLI do
     end
   end
 
-  defp unkown_opts(invalid) do
+  def unkown_opts(invalid) do
     invalid =
       invalid
       |> Enum.map(fn {op, _} -> op end)
@@ -47,7 +45,7 @@ defmodule Devit.CLI do
     |> warning(desc)
   end
 
-  defp default_error do
+  def default_error do
     desc = "Please, provide a article/markdown file with --article-path/-a option!"
 
     "No article/markdown"
