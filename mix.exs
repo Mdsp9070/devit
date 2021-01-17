@@ -7,7 +7,8 @@ defmodule Devit.MixProject do
       version: "0.1.0",
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      escript: escript()
     ]
   end
 
@@ -16,6 +17,13 @@ defmodule Devit.MixProject do
     [
       extra_applications: [:logger],
       mod: {Devit.Application, []}
+    ]
+  end
+
+  defp escript do
+    [
+      path: "./bin/devit",
+      main_module: Devit.CLI
     ]
   end
 
