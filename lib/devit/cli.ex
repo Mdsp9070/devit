@@ -5,6 +5,8 @@ defmodule Devit.CLI do
 
   import Devit.Colors
 
+  alias Devit.Core
+
   def main(args \\ []) do
     args
     |> parse_args()
@@ -18,6 +20,7 @@ defmodule Devit.CLI do
       _ ->
         {:error, :unkown_error}
     end
+    |> Core.post()
   end
 
   defp parse_args(args) do
