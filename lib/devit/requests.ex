@@ -23,6 +23,17 @@ defmodule Devit.Requests do
     end
   end
 
+  def create_article(api_key, data) do
+    body =
+      ~s("title": "#{data[:title]}", "body_markdown": "#{data[:markdown]}", "published": #{
+        data[:published]
+      }, "tags": #{data[:tags]})
+
+    api_key
+    |> build_client()
+    |> Tesla.post(@article, body: body)
+  end
+
   defp build_client(api_key) do
     middlewares = [
       {Tesla.Middleware.BaseUrl, "https://dev.to"},
