@@ -5,19 +5,33 @@ defmodule Devit.CLI do
 
   import Devit.Colors
 
+  alias Devit.Core
+
   def main(args \\ []) do
     args
     |> parse_args()
     |> case do
       path when is_binary(path) ->
-        {:ok, path}
+        path
 
-      err when is_tuple(err) ->
+      {:error, err} ->
+        desc = "An error has occured"
+
         err
+        |> error(desc)
+
+        System.halt(1)
 
       _ ->
-        {:error, :unkown_error}
+        desc = "I really don't know what happened"
+
+        :unknown_error
+        |> error(desc)
+
+        System.halt(1)
     end
+    |> Core.connect()
+    |> Core.post()
   end
 
   defp parse_args(args) do

@@ -30,6 +30,11 @@ defmodule Devit.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:tesla, "~> 1.4.0"},
+      {:hackney, "~> 1.16.0"},
+      {:front_matter, "~> 1.0.1"},
+      {:jason, ">= 1.0.0"},
+      {:cli_spinners, "~> 0.1.0"},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:git_hooks, "~> 0.5.0", only: [:test, :dev], runtime: false}
