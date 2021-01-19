@@ -15,13 +15,13 @@ defmodule Devit.Core do
 
   def connect(article_path) do
     spin_fun(
-      [text: "Attempting to connect to dev.to...", frames: :dots, done: "Connected!"],
+      [text: "Attempting to connect to dev.to...\n", frames: :dots, done: "Connected!"],
       fn -> do_ping_user(article_path) end
     )
   end
 
   def post({:ok, api_key, article_path}) do
-    spin_fun([text: "Posting your article...", frames: :dots, done: "Posted!"], fn ->
+    spin_fun([text: "Posting your article...\n", frames: :dots, done: "Posted!"], fn ->
       do_post(api_key, article_path)
     end)
   end

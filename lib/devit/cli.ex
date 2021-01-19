@@ -12,7 +12,7 @@ defmodule Devit.CLI do
     |> parse_args()
     |> case do
       path when is_binary(path) ->
-        {:ok, path}
+        path
 
       {:error, err} ->
         desc = "An error has occured"

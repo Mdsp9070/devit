@@ -24,17 +24,21 @@ defmodule Devit.Requests do
   end
 
   def create_article(api_key, data) do
-    body =
-      ~s("title": "#{data[:title]}", "body_markdown": "#{data[:markdown]}", "published": #{
-        data[:published]
-      }, "tags": #{data[:tags]})
+    body = %{
+      "article" => %{
+        "tags" => data["tags"],
+        "title" => data["title"],
+        "published" => data["published"],
+        "body_markdown" => data["body"]
+      }
+    }
 
     api_key
     |> build_client()
-    |> Tesla.post(@article, body: body)
+    |> Tesla.post(@article, body)
     |> case do
       {:ok, %{status: status, body: body}} ->
-        if status == 200 do
+        if status == 201 do
           {:ok, body["url"]}
         else
           {:error, :post_failed}
