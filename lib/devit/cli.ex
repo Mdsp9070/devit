@@ -14,12 +14,23 @@ defmodule Devit.CLI do
       path when is_binary(path) ->
         {:ok, path}
 
-      err when is_tuple(err) ->
+      {:error, err} ->
+        desc = "An error has occured"
+
         err
+        |> error(desc)
+
+        System.halt(1)
 
       _ ->
-        {:error, :unkown_error}
+        desc = "I really don't know what happened"
+
+        :unknown_error
+        |> error(desc)
+
+        System.halt(1)
     end
+    |> Core.connect()
     |> Core.post()
   end
 

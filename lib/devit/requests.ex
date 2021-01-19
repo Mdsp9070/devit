@@ -6,16 +6,16 @@ defmodule Devit.Requests do
   @user "/api/users/me"
   @article "/api/articles"
 
-  def pings_user(api_key) do
+  def ping_user(api_key) do
     api_key
     |> build_client()
     |> Tesla.get(@user)
     |> case do
       {:ok, %{body: body}} ->
-        if !is_integer(body["id"]) do
-          {:error, :invalid_api_key}
-        else
+        if is_integer(body["id"]) do
           {:ok, :valid_user}
+        else
+          {:error, :invalid_api_key}
         end
 
       {:error, _error} ->
@@ -32,6 +32,17 @@ defmodule Devit.Requests do
     api_key
     |> build_client()
     |> Tesla.post(@article, body: body)
+    |> case do
+      {:ok, %{status: status, body: body}} ->
+        if status == 200 do
+          {:ok, body["url"]}
+        else
+          {:error, :post_failed}
+        end
+
+      {:error, _error} ->
+        {:error, :request_failed}
+    end
   end
 
   defp build_client(api_key) do
