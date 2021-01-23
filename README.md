@@ -9,12 +9,12 @@ without leaving your comfy terminal.
 
 ## Install
 
-You ccould download the latest release at [Releases page](https://github.com/Mdsp9070/devit/releases)
+You could download the latest release at [Releases page](https://github.com/Mdsp9070/devit/releases)
 
 or install the escript with `mix`
 
 ```sh
-mix escript.install hex devit 
+mix escript.install hex devit
 ```
 
 ## Configure
@@ -44,7 +44,7 @@ Now you are good to go...
 For publishing, your markdown doc must have the following frontmatter:
 
 ```yaml
---- 
+---
 title: My Awesome Post
 tags: some, tags, here
 published: true | false
@@ -64,8 +64,8 @@ Dev.to will then CDN it and you can delete it from there if you want to.
 When you’re ready to publish, run
 
 ```console
-$ devit -a <path-to-article> 
-Done! Your post has been published at https://medium.com/@gaben/76272e9d241c
+$ devit -a <path-to-article>
+Done! Your post has been published at https://dev.to/example/76272e9d241c
 ```
 
 It’s that simple.
@@ -85,7 +85,7 @@ mix escript.uninstall devit
 ## Inspiration
 
 This project is completely based on [mdm](https://github.com/pavanjadhaw/mdm)!
-Ireally like of the ideai and tried to implement in Elixir and also give
+I really liked of the idea and tried to implement in Elixir and also give
 a try on dev.to API!
 
 ## License
