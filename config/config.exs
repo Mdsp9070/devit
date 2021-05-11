@@ -12,14 +12,6 @@ if Mix.env() == :dev do
           {:cmd, "mix compile --warning-as-errors"},
           {:cmd, "mix credo --strict"}
         ]
-      ],
-      pre_push: [
-        verbose: false,
-        tasks: [
-          {:cmd, "mix format --check-formatted"},
-          {:cmd, "mix dialyzer"},
-          {:cmd, "mix test"}
-        ]
       ]
     ]
 end
