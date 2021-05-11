@@ -1,0 +1,115 @@
+#+title: Devit
+#+author: Matheus de Souza Pessanha
+#+email: matheus_pessanha2001@outlook.com
+
+#+caption: tests
+[[https://github.com/Mdsp9070/devit/workflows/test/badge.svg?branch=main]]
+
+#+caption: analysis
+[[https://github.com/Mdsp9070/devit/workflows/analysis/badge.svg?branch=main]]
+
+#+begin_quote
+  publish your markdown to dev.to, from cli
+#+end_quote
+
+devit is commandline utility that lets you publish your markdown
+documents without leaving your comfy terminal.
+
+** Install
+   :PROPERTIES:
+   :CUSTOM_ID: install
+   :END:
+You could download the latest release at
+[[https://github.com/Mdsp9070/devit/releases][Releases page]]
+
+or install the escript with =mix=
+
+#+begin_example
+  mix escript.install hex devit
+#+end_example
+
+** Configure
+   :PROPERTIES:
+   :CUSTOM_ID: configure
+   :END:
+devit requires dev.to API key to be able to publish your markdown. You
+can generate API key from the dev.to
+[[https://dev.to/settings/account][settings]] page. Export this
+integration token by adding it to your =~/.bashrc=, =~/.zshrc= or
+=~/.config/fish/config.fish= as follows
+
+- bash and zsh
+
+#+begin_src sh
+  export DEVTO_API_KEY="api_key"
+#+end_src
+
+- fish
+
+#+begin_src fish
+  set DEVTO_API_KEY "api_key"
+#+end_src
+
+Now you are good to go...
+
+** Publishing
+   :PROPERTIES:
+   :CUSTOM_ID: publishing
+   :END:
+For publishing, your markdown doc must have the following frontmatter:
+
+#+begin_src md
+  ---
+  title: My Awesome Post
+  tags: some, tags, here
+  published: true | false
+  ---
+  ## markdown here
+#+end_src
+
+If your post contains images, host them somewhere public and then
+include them in your document like so:
+
+#+begin_example
+  ![cat](https://catpics.com/some_cat.png)
+#+end_example
+
+Dev.to will then CDN it and you can delete it from there if you want to.
+
+When you're ready to publish, run
+
+#+begin_src sh
+  $ devit -a <path-to-article>
+  Done! Your post has been published at https://dev.to/example/76272e9d241c
+#+end_src
+
+It's that simple.
+
+** Uninstall
+   :PROPERTIES:
+   :CUSTOM_ID: uninstall
+   :END:
+It's sad to see you go :(
+
+Only remove the downloaded binary
+
+or if you installed via `mix`:
+
+#+begin_example
+  mix escript.uninstall devit
+#+end_example
+
+** Inspiration
+   :PROPERTIES:
+   :CUSTOM_ID: inspiration
+   :END:
+This project is completely based on
+[[https://github.com/pavanjadhaw/mdm][mdm]]! I really liked of the idea
+and tried to implement in Elixir and also give a try on dev.to API!
+
+** License
+   :PROPERTIES:
+   :CUSTOM_ID: license
+   :END:
+
+This project is licensed by [[GPLv3][./LICENSE]] license!
