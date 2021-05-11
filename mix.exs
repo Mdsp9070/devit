@@ -30,8 +30,7 @@ defmodule Devit.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:tesla, "~> 1.4.0"},
-      {:hackney, "~> 1.16.0"},
+      {:finch, "~> 0.7"},
       {:front_matter, "~> 1.0.1"},
       {:jason, ">= 1.0.0"},
       {:cli_spinners, "~> 0.1.0"},

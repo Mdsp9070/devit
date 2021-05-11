@@ -15,5 +15,3 @@ if Mix.env() == :dev do
       ]
     ]
 end
-
-config :tesla, adapter: Tesla.Adapter.Hackney
