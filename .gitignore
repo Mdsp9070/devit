@@ -27,3 +27,7 @@ devit-*.tar
 /tmp
 
 /bin
+
+# nix stuff
+/.nix-mix/
+/.nix-hex/
