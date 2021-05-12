@@ -33,6 +33,12 @@ defmodule Devit.Colors do
     |> IO.puts()
   end
 
+  def info(text) do
+    "#{text}"
+    |> blue()
+    |> IO.puts()
+  end
+
   def info(name, desc) do
     "#{name}: #{desc}"
     |> blue()

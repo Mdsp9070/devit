@@ -4,6 +4,7 @@ defmodule Devit.CLI do
   """
 
   alias Devit.Cli.{ErrorHandlers, Help}
+  alias Devit.Core
 
   def main(args \\ []) do
     args
@@ -45,5 +46,5 @@ defmodule Devit.CLI do
   end
 
   defp handle_commands(help: true), do: Help.build()
-  defp handle_commands(article_path: path) when is_binary(path), do: :ok
+  defp handle_commands(article_path: path) when is_binary(path), do: path |> Core.run()
 end

@@ -5,8 +5,8 @@ defmodule Devit.Cli.ErrorHandlers do
 
   import Devit.Colors, only: [error: 1, warning: 2]
 
-  @spec unkown_opts([atom()]) :: :ok
-  def unkown_opts(invalid) do
+  @spec unknown_opts([atom()]) :: :ok
+  def unknown_opts(invalid) do
     desc = "I really don't know what to do with these options:\n#{inspect(invalid)}"
 
     "What are these?"
