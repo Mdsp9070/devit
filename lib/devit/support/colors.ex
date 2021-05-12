@@ -33,6 +33,12 @@ defmodule Devit.Colors do
     |> IO.puts()
   end
 
+  def info(name, desc) do
+    "#{name}: #{desc}"
+    |> blue()
+    |> IO.puts()
+  end
+
   def green(text) do
     ANSI.green() <> text <> ANSI.reset()
   end
@@ -43,5 +49,9 @@ defmodule Devit.Colors do
 
   def yellow(text) do
     ANSI.yellow() <> text <> ANSI.reset()
+  end
+
+  def blue(text) do
+    ANSI.blue() <> text <> ANSI.reset()
   end
 end

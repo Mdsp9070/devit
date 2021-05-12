@@ -59,7 +59,7 @@ defmodule Devit.Client do
 
   defp handle_user_response({:error, _reason} = err), do: err
   defp handle_user_response({:ok, %Response{status: 200}}), do: {:ok, :valid_user}
-  defp handle_user_response({:ok, %Response{status: 401}}), do: {:error, :unauthenticated}
+  defp handle_user_response({:ok, %Response{status: 401}}), do: {:error, :unauthorized}
   defp handle_user_response({:ok, %Response{status: _}}), do: {:error, :invalid_api_key}
 
   defp pool_size, do: 2
