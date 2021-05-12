@@ -9,6 +9,12 @@ defmodule Devit.Colors do
   @failure "❎"
   @warning "⚠️"
 
+  def error(msg) do
+    "#{@failure} #{msg}"
+    |> red()
+    |> IO.puts()
+  end
+
   def error(err, desc) do
     "#{@failure} #{err}: #{desc}"
     |> red()

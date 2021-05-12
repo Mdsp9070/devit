@@ -3,68 +3,47 @@ defmodule Devit.CLI do
   Escript main module where cli options are parsed
   """
 
-  import Devit.Colors
-
-  alias Devit.Core
+  alias Devit.Cli.{ErrorHandlers, Help}
 
   def main(args \\ []) do
     args
     |> parse_args()
     |> case do
-      path when is_binary(path) ->
-        path
-
-      {:error, err} ->
-        desc = "An error has occured"
-
-        err
-        |> error(desc)
-
-        System.halt(1)
-
-      _ ->
-        desc = "I really don't know what happened"
-
-        :unknown_error
-        |> error(desc)
-
-        System.halt(1)
+      {:ok, parsed} -> parsed |> handle_commands()
+      :error -> System.halt(1)
     end
-    |> Core.connect()
-    |> Core.post()
   end
 
   defp parse_args(args) do
-    opts = [strict: [article_path: :string], aliases: [a: :article_path]]
+    opts = [
+      strict: [article_path: :string, help: :boolean],
+      aliases: [a: :article_path, h: :help]
+    ]
 
     case OptionParser.parse(args, opts) do
-      {[{_op, path}], _, invalid} ->
-        unless Enum.empty?(invalid), do: unkown_opts(invalid)
-        path
+      {[], _, []} ->
+        ErrorHandlers.no_opts()
 
-      {[], _, invalid} ->
-        unkown_opts(invalid)
-        default_error()
+        :error
+
+      {_, _, invalid} when invalid != [] ->
+        invalid
+        |> ErrorHandlers.extract_options()
+        |> ErrorHandlers.unknown_opts()
+
+        :error
+
+      {parsed, _, invalid} ->
+        unless Enum.empty?(invalid) do
+          invalid
+          |> ErrorHandlers.extract_options()
+          |> ErrorHandlers.unknown_opts()
+        end
+
+        {:ok, parsed}
     end
   end
 
-  def unkown_opts(invalid) do
-    invalid =
-      invalid
-      |> Enum.map(fn {op, _} -> op end)
-
-    desc = "I really don't know what to do with these options:\n#{inspect(invalid)}"
-
-    "What are these?"
-    |> warning(desc)
-  end
-
-  def default_error do
-    desc = "Please, provide a article/markdown file with --article-path/-a option!"
-
-    "No article/markdown"
-    |> error(desc)
-
-    {:error, :default_error}
-  end
+  defp handle_commands(help: true), do: Help.build()
+  defp handle_commands(article_path: path) when is_binary(path), do: :ok
 end
