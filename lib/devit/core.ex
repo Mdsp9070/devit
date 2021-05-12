@@ -17,8 +17,8 @@ defmodule Devit.Core do
   end
 
   defp validate_user do
-    init_text = "Validating your user into dev.to...\n" |> Colors.info()
-    done_text = "Congrats, you're a valid dev.to user!" |> Colors.success()
+    init_text = "Validating your user into dev.to...\n" |> Colors.build_info()
+    done_text = "Congrats, you're a valid dev.to user!" |> Colors.build_success()
 
     spin_fun(
       spin_opts(init_text, done_text),
@@ -29,7 +29,7 @@ defmodule Devit.Core do
   end
 
   defp post_article(body) do
-    init_text = "Trying to publish your article... Gimme a sec!\n"
+    init_text = "Trying to publish your article... Gimme a sec!\n" |> Colors.build_info()
     done_text = "\n"
 
     spin_fun(

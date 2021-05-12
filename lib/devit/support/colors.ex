@@ -9,39 +9,70 @@ defmodule Devit.Colors do
   @failure "❎"
   @warning "⚠️"
 
-  def error(msg) do
+  def build_error(msg) do
     "#{@failure} #{msg}"
     |> red()
+  end
+
+  def build_error(err, desc) do
+    "#{@failure} #{err}: #{desc}"
+    |> red()
+  end
+
+  def error(msg) do
+    msg
+    |> build_error()
     |> IO.puts()
   end
 
   def error(err, desc) do
-    "#{@failure} #{err}: #{desc}"
-    |> red()
+    err
+    |> build_error(desc)
     |> IO.puts()
+  end
+
+  def build_success(desc) do
+    "#{@success} #{desc}"
+    |> green()
   end
 
   def success(desc) do
-    "#{@success} #{desc}"
-    |> green()
+    desc
+    |> build_success()
     |> IO.puts()
   end
 
-  def warning(name, desc) do
+  def build_warning(name, desc) do
     "#{@warning} #{name}: #{desc}"
     |> yellow()
     |> IO.puts()
   end
 
-  def info(text) do
+  def warning(name, desc) do
+    name
+    |> build_warning(desc)
+    |> IO.puts()
+  end
+
+  def build_info(text) do
     "#{text}"
     |> blue()
+  end
+
+  def build_info(name, desc) do
+    "#{name}: #{desc}"
+    |> blue()
+  end
+
+  def info(text) do
+    text
+    |> build_info()
     |> IO.puts()
   end
 
   def info(name, desc) do
-    "#{name}: #{desc}"
-    |> blue()
+    name
+    |> build_info(desc)
     |> IO.puts()
   end
 
