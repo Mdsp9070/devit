@@ -3,7 +3,7 @@ defmodule Devit.Config do
   Retrive system configs
   """
 
-  def api_key do
+  def get_api_key do
     case System.get_env("DEVTO_API_KEY") do
       key when is_binary(key) ->
         {:ok, key}
