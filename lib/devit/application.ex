@@ -5,11 +5,12 @@ defmodule Devit.Application do
 
   use Application
 
+  import Devit.Client, only: [child_spec: 0]
+
   @impl true
   def start(_type, _args) do
     children = [
-      # Starts a worker by calling: Devit.Worker.start_link(arg)
-      # {Devit.Worker, arg}
+      {Finch, child_spec()}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
